@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knorpel – Histologie Lernhilfe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg:       #F7F5F0;
+    --ink:      #1C1A18;
+    --muted:    #6B6560;
+    --rule:     #D9D4CC;
+    --hyalin:   #4A7C9E;
+    --hyalin-l: #D8EAF5;
+    --elastisch:#7B5EA7;
+    --elastisch-l:#EDE5F7;
+    --faser:    #2E8B6E;
+    --faser-l:  #D4F0E8;
+    --osce:     #C45A1B;
+    --osce-l:   #FDEEE5;
+    --tip:      #8B6914;
+    --tip-l:    #FDF5DC;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 48px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--muted);
+  }
+  .subtitle {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* SECTION TITLES */
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  section { margin-bottom: 56px; }
+
+  /* BEGRIFFE */
+  .glossar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media(max-width: 560px){ .glossar { grid-template-columns: 1fr; } }
+
+  .term {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .term-word {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .term-def {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  /* KNORPEL CARDS */
+  .knorpel-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .kcard {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+
+  .kcard-header {
+    padding: 16px 20px 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .kcard-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    opacity: 0.25;
+  }
+
+  .kcard-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
+
+  .kcard-body {
+    padding: 0 20px 20px;
+    background: white;
+  }
+
+  /* Hyalin */
+  .kcard--hyalin .kcard-header { background: var(--hyalin-l); color: var(--hyalin); }
+  .kcard--hyalin .kcard-num { color: var(--hyalin); }
+  .kcard--hyalin .badge { background: var(--hyalin); }
+
+  /* Elastisch */
+  .kcard--elastisch .kcard-header { background: var(--elastisch-l); color: var(--elastisch); }
+  .kcard--elastisch .kcard-num { color: var(--elastisch); }
+  .kcard--elastisch .badge { background: var(--elastisch); }
+
+  /* Faser */
+  .kcard--faser .kcard-header { background: var(--faser-l); color: var(--faser); }
+  .kcard--faser .kcard-num { color: var(--faser); }
+  .kcard--faser .badge { background: var(--faser); }
+
+  .prop-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13.5px; }
+  .prop-table tr { border-bottom: 1px solid var(--rule); }
+  .prop-table tr:last-child { border-bottom: none; }
+  .prop-table td { padding: 8px 6px; vertical-align: top; }
+  .prop-table td:first-child {
+    font-weight: 500;
+    color: var(--muted);
+    width: 36%;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 10px;
+  }
+
+  .badge {
+    display: inline-block;
+    color: white;
+    font-size: 10.5px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin: 2px 2px 2px 0;
+    white-space: nowrap;
+  }
+
+  .highlight-box {
+    margin-top: 12px;
+    border-left: 3px solid currentColor;
+    padding: 8px 12px;
+    font-size: 13.5px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 0 4px 4px 0;
+  }
+  .kcard--hyalin .highlight-box { color: var(--hyalin); background: var(--hyalin-l); }
+  .kcard--elastisch .highlight-box { color: var(--elastisch); background: var(--elastisch-l); }
+  .kcard--faser .highlight-box { color: var(--faser); background: var(--faser-l); }
+
+  .highlight-box strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+
+  /* VERGLEICHSTABELLE */
+  .vergleich { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .vergleich th, .vergleich td { border: 1px solid var(--rule); padding: 9px 11px; vertical-align: top; }
+  .vergleich thead th { background: var(--ink); color: white; font-weight: 500; font-size: 12px; text-align: left; }
+  .vergleich thead th:nth-child(2) { background: var(--hyalin); }
+  .vergleich thead th:nth-child(3) { background: var(--elastisch); }
+  .vergleich thead th:nth-child(4) { background: var(--faser); }
+  .vergleich tbody tr:nth-child(even) td { background: #F2F0EC; }
+  .vergleich td:first-child { font-weight: 500; color: var(--muted); font-size: 12px; }
+
+  /* OSCE TIPS */
+  .osce-box {
+    background: var(--osce-l);
+    border: 1px solid #F0C4AA;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .osce-box h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--osce);
+    margin-bottom: 10px;
+  }
+  .osce-box ul { padding-left: 18px; }
+  .osce-box li { margin-bottom: 6px; font-size: 13.5px; }
+
+  .tip-box {
+    background: var(--tip-l);
+    border-left: 3px solid var(--tip);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-size: 13.5px;
+  }
+  .tip-box strong { color: var(--tip); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+
+  /* 4 GEWEBETYPEN */
+  .gewebe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:560px){ .gewebe-grid { grid-template-columns: 1fr; } }
+
+  .gewebe-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .gewebe-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 8px; }
+  .gewebe-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .gewebe-card .merkmale { margin-top: 8px; font-size: 13px; }
+  .gewebe-card .merkmale li { margin-bottom: 3px; }
+
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; flex-shrink: 0; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    color: var(--muted);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">POL-OSCE Lernhilfe · Histologie</div>
+  <h1>Die drei Arten <em>des Knorpels</em></h1>
+  <p class="subtitle">Überblick, Begriffe & OSCE-Tipps für Grundniveau · Fokus: 4 Grundgewebetypen erkennen</p>
+</header>
+
+<!-- BEGRIFFE -->
+<section>
+  <h2>Wichtige Begriffe zuerst</h2>
+  <div class="glossar">
+    <div class="term">
+      <div class="term-word">Chondrozyt</div>
+      <div class="term-def">Ausgereifte Knorpelzelle, sitzt in Lakunen (Höhlen) in der Grundsubstanz.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Lakune</div>
+      <div class="term-def">„Höhle" im Knorpel, in der ein oder mehrere Chondrozyten sitzen. Im Schnitt oft leer (Schrumpfartefakt).</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Isogengruppe</div>
+      <div class="term-def">Gruppe von 2–8 Chondrozyten, die durch Zellteilung aus einer Mutterzelle entstanden sind und zusammen in einer Lakune sitzen.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Matrix / Grundsubstanz</div>
+      <div class="term-def">Extrazelluläre Masse zwischen den Zellen; besteht aus Kollagenfasern + Proteoglykanen (z.B. Aggrekan) + Wasser.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Perichondrium</div>
+      <div class="term-def">Bindegewebskapsel, die Knorpel umgibt (außer Gelenkknorpel). Enthält Vorläuferzellen (Chondroblasten).</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Kollagen Typ II</div>
+      <div class="term-def">Lichtmikroskopisch unsichtbar, macht die Matrix homogen-glasig (hyalin). Hauptkollagen im Knorpel.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Elastische Fasern</div>
+      <div class="term-def">Färben sich mit Orcein/Resorcin-Fuchsin dunkel; machen Knorpel biegsam und federnd.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Kollagen Typ I</div>
+      <div class="term-def">Dicke Faserbündel, die mit Hämatoxylin-Eosin (HE) als eosinophile Streifen sichtbar sind. Im Faserknorpel.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">HE-Färbung</div>
+      <div class="term-def">Standardfärbung: Hämatoxylin (basisch) → Kerne blau; Eosin (sauer) → Zytoplasma/Fasern rosa/rot.</div>
+    </div>
+    <div class="term">
+      <div class="term-word">Chondroitin­sulfat</div>
+      <div class="term-def">Saures Proteoglykan der Matrix; bindet Wasser und erklärt die Druckresistenz des Knorpels. Basophil → blau in HE.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DREI KNORPELARTEN -->
+<section>
+  <h2>Die drei Knorpelarten</h2>
+  <div class="knorpel-grid">
+
+    <!-- HYALIN -->
+    <div class="kcard kcard--hyalin">
+      <div class="kcard-header">
+        <span class="kcard-num">01</span>
+        <span class="kcard-title">Hyaliner Knorpel</span>
+      </div>
+      <div class="kcard-body">
+        <table class="prop-table">
+          <tr>
+            <td>Wo?</td>
+            <td>Gelenkflächen, Rippenknorpel, Nasenknorpel, Trachea-/Bronchialringe, epiphysäre Wachstumsfuge</td>
+          </tr>
+          <tr>
+            <td>Matrix</td>
+            <td>Glasig-homogen, bläulich-lila (basophil). Keine sichtbaren Fasern (Kollagen II ist nicht aufzulösen).</td>
+          </tr>
+          <tr>
+            <td>Zellen</td>
+            <td>Chondrozyten in Lakunen, oft in <strong>Isogengruppen</strong> (2–4 Zellen pro Lakune)</td>
+          </tr>
+          <tr>
+            <td>Perichondrium</td>
+            <td>Vorhanden (außer Gelenkfläche)</td>
+          </tr>
+          <tr>
+            <td>Besonderheit</td>
+            <td><span class="badge">Territoriale Matrix</span> dunklerer Hof um Lakune (höherer Proteoglykangehalt)</td>
+          </tr>
+        </table>
+        <div class="highlight-box">
+          <strong>🔬 Erkennungsmerkmal im Schnitt</strong>
+          Glasartig, <em>keine</em> sichtbaren Fasern, Isogengruppen, basophile Matrix mit hellerem Territorium um jede Lakune.
+        </div>
+      </div>
+    </div>
+
+    <!-- ELASTISCH -->
+    <div class="kcard kcard--elastisch">
+      <div class="kcard-header">
+        <span class="kcard-num">02</span>
+        <span class="kcard-title">Elastischer Knorpel</span>
+      </div>
+      <div class="kcard-body">
+        <table class="prop-table">
+          <tr>
+            <td>Wo?</td>
+            <td>Ohrmuschel, Epiglottis (Kehldeckel), kleine Kehlkopfknorpel (Cuneiforme, Corniculata), äußerer Gehörgang</td>
+          </tr>
+          <tr>
+            <td>Matrix</td>
+            <td>Wie hyalin, aber <strong>durchzogen von elastischen Fasern</strong>. In HE kaum zu sehen – Spezialfärbung nötig!</td>
+          </tr>
+          <tr>
+            <td>Zellen</td>
+            <td>Chondrozyten, häufig einzeln oder in kleinen Gruppen</td>
+          </tr>
+          <tr>
+            <td>Perichondrium</td>
+            <td>Vorhanden</td>
+          </tr>
+          <tr>
+            <td>Besonderheit</td>
+            <td><span class="badge">Orcein-Färbung</span> oder <span class="badge">Resorcin-Fuchsin</span> → elastische Fasern sichtbar (dunkelbraun/violett)</td>
+          </tr>
+        </table>
+        <div class="highlight-box">
+          <strong>🔬 Erkennungsmerkmal im Schnitt</strong>
+          Sieht ähnlich wie hyalin aus, aber <em>elastische Fasern</em> durchziehen die Matrix. In HE schwer von hyalin zu unterscheiden → Spezialfärbung entscheidend!
+        </div>
+      </div>
+    </div>
+
+    <!-- FASER -->
+    <div class="kcard kcard--faser">
+      <div class="kcard-header">
+        <span class="kcard-num">03</span>
+        <span class="kcard-title">Faserknorpel (Fibrokartilago)</span>
+      </div>
+      <div class="kcard-body">
+        <table class="prop-table">
+          <tr>
+            <td>Wo?</td>
+            <td>Bandscheiben (Annulus fibrosus), Menisken, Symphysis pubica, Ansätze von Sehnen/Bändern</td>
+          </tr>
+          <tr>
+            <td>Matrix</td>
+            <td>Dominiert von <strong>dicken Kollagen-Typ-I-Bündeln</strong>, kaum freie Grundsubstanz sichtbar. Eosinophil (rosa).</td>
+          </tr>
+          <tr>
+            <td>Zellen</td>
+            <td>Chondrozyten liegen <strong>reihig zwischen Faserbündeln</strong>, oft wie Perlenkette angeordnet. Keine echten Isogengruppen.</td>
+          </tr>
+          <tr>
+            <td>Perichondrium</td>
+            <td><strong>Fehlt!</strong></td>
+          </tr>
+          <tr>
+            <td>Besonderheit</td>
+            <td>Übergang zwischen Bindegewebe und Knorpel. Keine Kapsel, kein Perichondrium.</td>
+          </tr>
+        </table>
+        <div class="highlight-box">
+          <strong>🔬 Erkennungsmerkmal im Schnitt</strong>
+          Massiv viele eosinophile (rosa) Faserbündel, Zellen dazwischen in Reihen. Kein typisches „Glasiges". <em>Kein Perichondrium!</em>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VERGLEICHSTABELLE -->
+<section>
+  <h2>Schnellvergleich auf einen Blick</h2>
+  <table class="vergleich">
+    <thead>
+      <tr>
+        <th>Merkmal</th>
+        <th>Hyaliner Knorpel</th>
+        <th>Elastischer Knorpel</th>
+        <th>Faserknorpel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fasern sichtbar?</td>
+        <td>Nein (HE)</td>
+        <td>Ja (Spezialfärbung)</td>
+        <td>Ja – Typ I, HE sichtbar</td>
+      </tr>
+      <tr>
+        <td>Matrix-Farbe (HE)</td>
+        <td>Blau-lila, glasig</td>
+        <td>Blau-lila, glasig</td>
+        <td>Rosa (eosinophil)</td>
+      </tr>
+      <tr>
+        <td>Isogengruppen</td>
+        <td>Typisch</td>
+        <td>Vorhanden</td>
+        <td>Keine / Reihenanordnung</td>
+      </tr>
+      <tr>
+        <td>Perichondrium</td>
+        <td>Ja</td>
+        <td>Ja</td>
+        <td>Nein</td>
+      </tr>
+      <tr>
+        <td>Hauptfaser</td>
+        <td>Kollagen II (unsichtbar)</td>
+        <td>Elastin + Kollagen II</td>
+        <td>Kollagen I (sichtbar)</td>
+      </tr>
+      <tr>
+        <td>Funktion</td>
+        <td>Druckresistenz, Gleiten</td>
+        <td>Federkraft, Biegung</td>
+        <td>Zug + Druck, Puffer</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 4 GRUNDGEWEBETYPEN -->
+<section>
+  <h2>Die 4 Grundgewebetypen erkennen</h2>
+  <p style="color:var(--muted); font-size:13.5px; margin-bottom:16px;">Knorpel ist Stützgewebe → gehört zu Binde- & Stützgewebe. Hier der Überblick aller 4 Typen für dein OSCE:</p>
+  <div class="gewebe-grid">
+    <div class="gewebe-card">
+      <h3>🧱 Epithel</h3>
+      <p>Deckt Oberflächen ab oder kleidet Hohlorgane aus.</p>
+      <ul class="merkmale">
+        <li>Zellen dicht aneinander (kein Platz zwischen ihnen)</li>
+        <li>Liegt auf einer Basalmembran</li>
+        <li>Kein Gefäße im Epithel selbst</li>
+        <li>Formen: einschichtig / mehrschichtig, platt / kubisch / zylindrisch</li>
+      </ul>
+    </div>
+    <div class="gewebe-card">
+      <h3>💪 Muskelgewebe</h3>
+      <p>Kontraktil; erzeugt Bewegung.</p>
+      <ul class="merkmale">
+        <li><strong>Glatt:</strong> Spindelförmige Zellen, 1 zentraler Kern, keine Querstreifung</li>
+        <li><strong>Quergestreift (Skelett):</strong> Viele Kerne am Rand, Querstreifung sichtbar</li>
+        <li><strong>Herz:</strong> Quergestreift, 1–2 zentrale Kerne, Glanzstreifen</li>
+      </ul>
+    </div>
+    <div class="gewebe-card">
+      <h3>🧠 Nervengewebe</h3>
+      <p>Informationsverarbeitung und -leitung.</p>
+      <ul class="merkmale">
+        <li>Neurone: große Zellen mit großem, hellem Kern + Nukleolus</li>
+        <li>Nissl-Schollen (rauES ER) im Zytoplasma</li>
+        <li>Gliazellen drumherum (kleine dunkle Kerne)</li>
+        <li>Nervenfasern (Axone) in Bündeln (Nerv)</li>
+      </ul>
+    </div>
+    <div class="gewebe-card" style="border-color: #B5C4B1;">
+      <h3>🔗 Binde- & Stützgewebe</h3>
+      <p>Verbindet, stützt, speichert. <strong>Knorpel gehört hierhin!</strong></p>
+      <ul class="merkmale">
+        <li>Viel extrazelluläre Matrix (Fasern + Grundsubstanz)</li>
+        <li>Zellen weit verteilt (Fibroblasten, Chondrozyten, Adipozyten…)</li>
+        <li>Untertypen: lockeres BG, straffes BG, Fettgewebe, Knorpel, Knochen, Blut</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OSCE TIPPS -->
+<section>
+  <h2>OSCE-Tipps für dein POL</h2>
+
+  <div class="osce-box">
+    <h3>📋 Systematisch vorgehen – immer dieselbe Reihenfolge</h3>
+    <ul>
+      <li><strong>1. Was dominiert das Bild?</strong> Viele Zellen dicht? → Epithel. Viel Matrix, wenig Zellen? → Binde-/Stützgewebe.</li>
+      <li><strong>2. Gibt es Fasern?</strong> Sichtbare rosa Bündel → Faserknorpel oder Bindegewebe. Glasige Matrix → hyalin oder elastisch.</li>
+      <li><strong>3. Lakunen sichtbar?</strong> Zellen in Höhlen = Chondrozyten → Knorpel!</li>
+      <li><strong>4. Perichondrium vorhanden?</strong> Ja → hyalin oder elastisch. Nein → Faserknorpel.</li>
+      <li><strong>5. Spezialfärbung?</strong> Elastische Fasern sichtbar → elastischer Knorpel.</li>
+    </ul>
+  </div>
+
+  <div class="osce-box">
+    <h3>🎯 Was wird auf niedrigem Niveau erwartet?</h3>
+    <ul>
+      <li>Gewebetyp benennen: „Das ist <em>Knorpelgewebe</em>, also Stützgewebe."</li>
+      <li>Zellen identifizieren: „Die Zellen in Lakunen sind Chondrozyten."</li>
+      <li>Knorpelart begründen: „Die glasige, faserarme Matrix mit Isogengruppen spricht für hyalinen Knorpel."</li>
+      <li>Abgrenzung von anderen Geweben: Epithel hat keine Lakunen, Muskel hat Querstreifung, Nerv hat Neurone mit Nukleolus.</li>
+    </ul>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Merkhilfe: „Hyalin = Glas, Elastisch = Gummi, Faser = Seil"</strong>
+    Glasig und formstabil (hyalin) · Biegsam und federnd (elastisch) · Zug- und druckfest wie Seil/Sehne (Faser)
+  </div>
+
+  <div class="tip-box" style="margin-top: 10px;">
+    <strong>💡 HE-Trick: Was ist rosa, was ist blau?</strong>
+    Kerne → blau (basophil). Kollagen I-Fasern, Zytoplasma → rosa (eosinophil). Knorpelmatrix mit Proteoglykanen → blau-lila (basophil). Je mehr Proteoglykane, desto dunkler blau.
+  </div>
+
+  <div class="tip-box" style="margin-top: 10px;">
+    <strong>💡 Faserknorpel ≠ Bindegewebe?</strong>
+    Faserknorpel sieht aus wie straffes Bindegewebe, hat aber Chondrozyten in Lakunen. Das ist das entscheidende Unterscheidungsmerkmal!
+  </div>
+</section>
+
+<footer>
+  Histologie Lernhilfe · Knorpelgewebe · POL-OSCE Grundniveau · Erstellt mit Claude
+</footer>
+
+</body>
+</html>
