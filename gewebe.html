@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die 4 Grundgewebearten &middot; Histologie-Karteikarten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EFE4;
+    --paper-2:#EBE1CD;
+    --ink:#2B2419;
+    --ink-soft:#6B6152;
+    --purple:#4A3B7C;
+    --purple-tint:#E7E3F1;
+    --pink:#B84F68;
+    --pink-tint:#F5E3E7;
+    --rust:#A2582F;
+    --rust-tint:#F0E2D3;
+    --slate:#3F5A66;
+    --slate-tint:#DCE7E9;
+    --line:#D8CDB8;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+
+  /* ---- header / hero ---- */
+  header.hero{
+    padding:72px 0 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--purple);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(34px,5vw,52px);
+    line-height:1.08;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:600px;
+    margin:0;
+  }
+  .hero-slides{
+    display:flex;
+    gap:14px;
+    margin-top:36px;
+  }
+  .mini-slide{
+    width:64px;height:64px;border-radius:50%;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    background:var(--paper-2);
+    flex-shrink:0;
+  }
+
+  /* ---- nav dots ---- */
+  nav.jump{
+    position:sticky;top:0;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+    padding:14px 0;
+  }
+  nav.jump .wrap{display:flex;gap:8px;flex-wrap:wrap}
+  nav.jump a{
+    font-family:var(--font-mono);
+    font-size:12px;
+    text-decoration:none;
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 14px;
+    transition:background .15s ease;
+  }
+  nav.jump a:hover{background:var(--paper-2)}
+
+  /* ---- section: decision tree ---- */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  h2{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:28px;
+    margin:0 0 8px;
+  }
+  .section-sub{color:var(--ink-soft);margin:0 0 32px;font-size:15px;max-width:600px}
+
+  .tree{
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .tree-step{
+    display:grid;grid-template-columns:32px 1fr;gap:14px;
+    padding:16px 18px;
+    background:var(--paper-2);
+    border-radius:10px;
+    align-items:start;
+  }
+  .tree-step .num{
+    font-family:var(--font-mono);font-size:13px;color:var(--purple);
+    padding-top:2px;
+  }
+  .tree-step .q{font-weight:600;margin:0 0 4px}
+  .tree-step .a{margin:0;color:var(--ink-soft);font-size:14px}
+
+  /* ---- tissue sections ---- */
+  .tissue{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  @media(max-width:640px){ .tissue{grid-template-columns:1fr} }
+
+  .slide{
+    aspect-ratio:1/1;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background: radial-gradient(circle at 50% 50%, var(--tint) 0%, var(--tint) 60%, var(--paper-2) 100%);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .slide::after{
+    content:"";
+    position:absolute;inset:0;
+    border-radius:50%;
+    box-shadow: inset 0 0 22px rgba(43,36,25,0.18);
+  }
+  .slide svg{width:78%;height:78%}
+  .slide-label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:10px;
+    letter-spacing:0.02em;
+  }
+
+  .tissue-name{
+    font-family:var(--font-display);
+    font-size:24px;font-weight:500;
+    margin:0 0 4px;
+  }
+  .tissue-tag{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--accent-dark);
+    background:var(--accent-tint);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:14px;
+  }
+  .block-label{
+    font-family:var(--font-mono);
+    font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-soft);
+    margin:16px 0 4px;
+  }
+  .block-label:first-of-type{margin-top:0}
+  .merkmal{margin:0;font-size:15px}
+  .eselsbruecke{
+    margin:0;font-size:15px;font-style:italic;
+    border-left:2px solid var(--accent-dark);
+    padding-left:12px;
+  }
+  .subtypes{margin:0;padding-left:0;list-style:none;font-size:14px}
+  .subtypes li{padding:6px 0;border-top:1px solid var(--line)}
+  .subtypes li:first-child{border-top:none}
+  .subtypes b{font-weight:600}
+
+  /* ---- table ---- */
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);font-weight:500}
+
+  /* ---- flashcards ---- */
+  .quiz{
+    background:var(--paper-2);
+    border-radius:16px;
+    padding:32px;
+  }
+  .quiz-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .quiz-tabs button{
+    font-family:var(--font-body);font-size:13px;font-weight:600;
+    border:1px solid var(--line);background:var(--paper);
+    padding:8px 16px;border-radius:20px;cursor:pointer;color:var(--ink-soft);
+  }
+  .quiz-tabs button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .quiz-card{
+    background:var(--paper);
+    border-radius:12px;
+    padding:28px;
+    min-height:200px;
+    cursor:pointer;
+    border:1px solid var(--line);
+  }
+  .quiz-card .front{text-align:center;padding:30px 0}
+  .quiz-card .front .tag{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
+  .quiz-card .front .name{font-family:var(--font-display);font-size:26px;margin:10px 0 0}
+  .quiz-card .front .hint{font-size:13px;color:var(--ink-soft);margin-top:22px}
+  .quiz-nav{display:flex;justify-content:center;gap:10px;margin-top:20px}
+  .quiz-nav button{
+    font-family:var(--font-body);font-weight:600;font-size:13px;
+    border:1px solid var(--line);background:var(--paper);
+    padding:8px 18px;border-radius:8px;cursor:pointer;
+  }
+  .quiz-nav button:hover{background:var(--paper-2)}
+
+  footer{
+    padding:36px 0 60px;
+    color:var(--ink-soft);
+    font-size:13px;
+  }
+  footer .ai-note{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-mono);
+    font-size:11px;
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:20px;
+  }
+  footer .ai-note::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--purple);
+    display:inline-block;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Histologie &middot; POL-OSCE Vorbereitung</p>
+    <h1>Die 4 Grundgewebearten<br>auf einen Blick erkennen</h1>
+    <p class="lede">Epithel, Bindegewebe, Muskel- und Nervengewebe &mdash; die wichtigsten Erkennungsmerkmale, Eselsbr&uuml;cken und ein interaktiver Selbsttest.</p>
+    <div class="hero-slides" aria-hidden="true">
+      <div class="mini-slide" style="--tint:var(--purple-tint)"></div>
+      <div class="mini-slide" style="--tint:var(--pink-tint)"></div>
+      <div class="mini-slide" style="--tint:var(--rust-tint)"></div>
+      <div class="mini-slide" style="--tint:var(--slate-tint)"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#baum">Entscheidungsbaum</a>
+    <a href="#epithel">Epithel</a>
+    <a href="#bindegewebe">Bindegewebe</a>
+    <a href="#muskel">Muskel</a>
+    <a href="#nerven">Nerven</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+</nav>
+
+<section id="baum">
+  <div class="wrap">
+    <h2>Schnellcheck-Entscheidungsbaum</h2>
+    <p class="section-sub">Wenn du dir unter dem Mikroskop unsicher bist, geh diese vier Fragen der Reihe nach durch.</p>
+    <div class="tree">
+      <div class="tree-step">
+        <div class="num">01</div>
+        <div><p class="q">Sind die Zellen dicht gepackt, fast kein Zwischenraum?</p><p class="a">Ja &rarr; Epithelgewebe. Dann weiter unterscheiden: platt, kubisch oder zylindrisch.</p></div>
+      </div>
+      <div class="tree-step">
+        <div class="num">02</div>
+        <div><p class="q">Viel Matrix/Raum zwischen wenigen, verstreuten Zellen sichtbar?</p><p class="a">Ja &rarr; Bindegewebe. Faserig und parallel = straff, viel freier Raum = locker, Zellen in H&ouml;hlen (Lakunen) = Knorpel oder Knochen.</p></div>
+      </div>
+      <div class="tree-step">
+        <div class="num">03</div>
+        <div><p class="q">Lange, faserartige, parallel liegende Zellen?</p><p class="a">Ja &rarr; Muskelgewebe. Verzweigt mit Glanzstreifen = Herz. Vielkernig, Kerne am Rand, gestreift = Skelett. Ein zentraler Kern, keine Streifung = glatt.</p></div>
+      </div>
+      <div class="tree-step">
+        <div class="num">04</div>
+        <div><p class="q">Sternf&ouml;rmige Zellen mit langen Forts&auml;tzen und hellem Kern?</p><p class="a">Ja &rarr; Nervengewebe. Kaum zu verwechseln &mdash; die Forts&auml;tze (Axon/Dendriten) sind eindeutig.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="epithel">
+  <div class="wrap">
+    <div class="tissue" style="--accent-dark:var(--purple);--accent-tint:var(--purple-tint)">
+      <div>
+        <div class="slide" style="--tint:var(--purple-tint)">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Schema von dicht gepackten Epithelzellen auf einer Basalmembran">
+            <line x1="8" y1="80" x2="92" y2="80" stroke="#4A3B7C" stroke-width="3"/>
+            <g fill="none" stroke="#4A3B7C" stroke-width="1.6">
+              <rect x="10" y="52" width="16" height="28" rx="2"/>
+              <rect x="26" y="52" width="16" height="28" rx="2"/>
+              <rect x="42" y="52" width="16" height="28" rx="2"/>
+              <rect x="58" y="52" width="16" height="28" rx="2"/>
+              <rect x="74" y="52" width="16" height="28" rx="2"/>
+            </g>
+            <g fill="#4A3B7C" opacity="0.75">
+              <circle cx="18" cy="66" r="4"/>
+              <circle cx="34" cy="66" r="4"/>
+              <circle cx="50" cy="66" r="4"/>
+              <circle cx="66" cy="66" r="4"/>
+              <circle cx="82" cy="66" r="4"/>
+            </g>
+          </svg>
+        </div>
+        <p class="slide-label">Zylinderepithel, schematisch</p>
+      </div>
+      <div>
+        <p class="tissue-name">Epithelgewebe</p>
+        <span class="tissue-tag">Grenzfl&auml;chen &amp; Oberfl&auml;chen</span>
+        <p class="block-label">Erkennungsmerkmal</p>
+        <p class="merkmal">Zellen liegen eng an eng, kaum Interzellularsubstanz, sitzt auf einer Basalmembran und bildet innere/&auml;u&szlig;ere Grenzfl&auml;chen.</p>
+        <p class="block-label">Eselsbr&uuml;cke</p>
+        <p class="eselsbruecke">&bdquo;Eng gepackt, einzige Grenze nach au&szlig;en&ldquo; &mdash; siehst du fast nur Zellkerne und kaum Zwischenraum, ist es Epithel.</p>
+        <p class="block-label">Unterarten</p>
+        <ul class="subtypes">
+          <li><b>Plattenepithel</b> &mdash; flach, breiter als hoch, f&uuml;r Diffusion (Alveolen, Endothel)</li>
+          <li><b>Kubisches Epithel</b> &mdash; w&uuml;rfelf&ouml;rmig, H&ouml;he &asymp; Breite (Nierentubuli)</li>
+          <li><b>Zylinderepithel</b> &mdash; hoch, schmal, oft mit Mikrovilli/Zilien (Darm, Atemwege)</li>
+          <li><b>Mehrschichtig verhornt</b> &mdash; mehrere Schichten, oben verhornt/kernlos (Epidermis)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bindegewebe">
+  <div class="wrap">
+    <div class="tissue" style="--accent-dark:var(--pink);--accent-tint:var(--pink-tint)">
+      <div>
+        <div class="slide" style="--tint:var(--pink-tint)">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Schema von verstreuten Bindegewebszellen in viel Matrix mit Fasern">
+            <g stroke="#B84F68" stroke-width="1" opacity="0.6" fill="none">
+              <path d="M5 20 Q40 10 90 25"/>
+              <path d="M8 45 Q45 55 92 42"/>
+              <path d="M10 70 Q50 60 88 75"/>
+            </g>
+            <g fill="#B84F68">
+              <ellipse cx="25" cy="30" rx="6" ry="4"/>
+              <ellipse cx="60" cy="18" rx="6" ry="4"/>
+              <ellipse cx="45" cy="55" rx="6" ry="4"/>
+              <ellipse cx="78" cy="60" rx="6" ry="4"/>
+              <ellipse cx="30" cy="80" rx="6" ry="4"/>
+              <ellipse cx="70" cy="85" rx="6" ry="4"/>
+            </g>
+          </svg>
+        </div>
+        <p class="slide-label">Lockeres Bindegewebe, schematisch</p>
+      </div>
+      <div>
+        <p class="tissue-name">Bindegewebe</p>
+        <span class="tissue-tag">St&uuml;tzt, verbindet, f&uuml;llt</span>
+        <p class="block-label">Erkennungsmerkmal</p>
+        <p class="merkmal">Wenige, verstreute Zellen in viel extrazellul&auml;rer Matrix &mdash; das genaue Gegenteil von Epithel.</p>
+        <p class="block-label">Eselsbr&uuml;cke</p>
+        <p class="eselsbruecke">&bdquo;Breiter Abstand&ldquo; &mdash; viel leerer oder faseriger Raum zwischen den Zellen signalisiert Bindegewebe.</p>
+        <p class="block-label">Unterarten</p>
+        <ul class="subtypes">
+          <li><b>Lockeres BG</b> &mdash; wenig Fasern, viel Grundsubstanz, viele Zelltypen</li>
+          <li><b>Straffes BG / Sehne</b> &mdash; parallele, dicht gepackte Kollagenfasern</li>
+          <li><b>Hyaliner Knorpel</b> &mdash; Chondrozyten in Lakunen, glasige Matrix (&bdquo;wie Glas&ldquo;)</li>
+          <li><b>Knochen</b> &mdash; Osteozyten in Lakunen, Osteon = &bdquo;Zielscheibe&ldquo; um Havers-Kanal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="muskel">
+  <div class="wrap">
+    <div class="tissue" style="--accent-dark:var(--rust);--accent-tint:var(--rust-tint)">
+      <div>
+        <div class="slide" style="--tint:var(--rust-tint)">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Schema von parallelen quergestreiften Muskelfasern mit randst&auml;ndigen Kernen">
+            <g stroke="#A2582F" stroke-width="4" fill="none" stroke-linecap="round">
+              <line x1="10" y1="20" x2="10" y2="80"/>
+              <line x1="30" y1="20" x2="30" y2="80"/>
+              <line x1="50" y1="20" x2="50" y2="80"/>
+              <line x1="70" y1="20" x2="70" y2="80"/>
+              <line x1="90" y1="20" x2="90" y2="80"/>
+            </g>
+            <g stroke="#A2582F" stroke-width="1" opacity="0.55">
+              <line x1="4" y1="30" x2="96" y2="30"/>
+              <line x1="4" y1="42" x2="96" y2="42"/>
+              <line x1="4" y1="54" x2="96" y2="54"/>
+              <line x1="4" y1="66" x2="96" y2="66"/>
+            </g>
+            <g fill="#A2582F">
+              <ellipse cx="10" cy="24" rx="4" ry="2.4"/>
+              <ellipse cx="30" cy="76" rx="4" ry="2.4"/>
+              <ellipse cx="50" cy="24" rx="4" ry="2.4"/>
+              <ellipse cx="70" cy="76" rx="4" ry="2.4"/>
+              <ellipse cx="90" cy="24" rx="4" ry="2.4"/>
+            </g>
+          </svg>
+        </div>
+        <p class="slide-label">Skelettmuskulatur, schematisch</p>
+      </div>
+      <div>
+        <p class="tissue-name">Muskelgewebe</p>
+        <span class="tissue-tag">Bewegung &amp; Kontraktion</span>
+        <p class="block-label">Erkennungsmerkmal</p>
+        <p class="merkmal">Lang gestreckte, faserartige Zellen, meist parallel ausgerichtet &mdash; wie Kabel nebeneinander.</p>
+        <p class="block-label">Eselsbr&uuml;cke</p>
+        <p class="eselsbruecke">Verzweigt + Glanzstreifen = Herz. Vielkernig, Kerne am Rand, gestreift = Skelett. Ein zentraler Kern, spindelf&ouml;rmig, glatt = glatte Muskulatur.</p>
+        <p class="block-label">Unterarten</p>
+        <ul class="subtypes">
+          <li><b>Glatte Muskulatur</b> &mdash; spindelf&ouml;rmig, 1 zentraler Kern, keine Streifung (Darm, Gef&auml;&szlig;e)</li>
+          <li><b>Skelettmuskulatur</b> &mdash; vielkernig, Kerne am Rand, deutliche Querstreifung (willk&uuml;rlich)</li>
+          <li><b>Herzmuskulatur</b> &mdash; verzweigt, 1&ndash;2 zentrale Kerne, Querstreifung + Glanzstreifen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nerven">
+  <div class="wrap">
+    <div class="tissue" style="--accent-dark:var(--slate);--accent-tint:var(--slate-tint)">
+      <div>
+        <div class="slide" style="--tint:var(--slate-tint)">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Schema einer sternf&ouml;rmigen Nervenzelle mit Forts&auml;tzen">
+            <g stroke="#3F5A66" stroke-width="2" fill="none" stroke-linecap="round">
+              <path d="M50 50 L20 20"/>
+              <path d="M50 50 L15 50"/>
+              <path d="M50 50 L20 80"/>
+              <path d="M50 50 L50 15"/>
+              <path d="M50 50 L80 25"/>
+              <path d="M50 50 Q75 55 92 60 Q97 61 96 65"/>
+            </g>
+            <circle cx="50" cy="50" r="14" fill="#3F5A66" opacity="0.85"/>
+            <circle cx="50" cy="50" r="5" fill="#DCE7E9"/>
+          </svg>
+        </div>
+        <p class="slide-label">Neuron, schematisch</p>
+      </div>
+      <div>
+        <p class="tissue-name">Nervengewebe</p>
+        <span class="tissue-tag">Erregungsleitung</span>
+        <p class="block-label">Erkennungsmerkmal</p>
+        <p class="merkmal">Sternf&ouml;rmige Zellen mit langen Forts&auml;tzen (Axon, Dendriten), gro&szlig;er heller Kern mit deutlichem Nukleolus.</p>
+        <p class="block-label">Eselsbr&uuml;cke</p>
+        <p class="eselsbruecke">&bdquo;Spinnenzelle mit einem langen Bein&ldquo; &mdash; die Forts&auml;tze sind das eindeutige Giveaway.</p>
+        <p class="block-label">Unterarten</p>
+        <ul class="subtypes">
+          <li><b>Neuron</b> &mdash; Perikaryon (Zellk&ouml;rper) + Dendriten + ein Axon</li>
+          <li><b>Gliazellen</b> &mdash; kleiner, unterst&uuml;tzende Helferzellen im Hintergrund</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tabelle">
+  <div class="wrap">
+    <h2>Alles auf einen Blick</h2>
+    <p class="section-sub">Zum schnellen Dr&uuml;berlesen kurz vor der Pr&uuml;fung.</p>
+    <table>
+      <thead>
+        <tr><th>Gewebeart</th><th>Erkennungsmerkmal</th><th>Eselsbr&uuml;cke</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Epithelgewebe</td><td>Dicht gepackte Zellen, kaum Zwischenraum, Basalmembran</td><td>Eng gepackt, einzige Grenze nach au&szlig;en</td></tr>
+        <tr><td>Bindegewebe</td><td>Viel Matrix, wenige verstreute Zellen</td><td>Breiter Abstand zwischen den Zellen</td></tr>
+        <tr><td>Muskelgewebe</td><td>Lang gestreckte, parallele Faserzellen</td><td>Fasern wie Kabel; Streifung + Kernlage entscheiden den Typ</td></tr>
+        <tr><td>Nervengewebe</td><td>Sternf&ouml;rmige Zellen mit Forts&auml;tzen, heller Kern</td><td>Spinnenzelle mit langem Bein</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="quiz" style="border-bottom:none">
+  <div class="wrap">
+    <h2>Selbsttest</h2>
+    <p class="section-sub">Klick auf eine Karte, um Merkmal und Eselsbr&uuml;cke aufzudecken. Mit den Reitern oder Pfeilen weiterspringen.</p>
+    <div class="quiz">
+      <div class="quiz-tabs" id="tabs"></div>
+      <div class="quiz-card" id="card"></div>
+      <div class="quiz-nav">
+        <button id="prevBtn">&larr; Zur&uuml;ck</button>
+        <button id="flipBtn">Umdrehen</button>
+        <button id="nextBtn">Weiter &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Erstellt als Lernhilfe f&uuml;r die Histologie-Vorbereitung.</p>
+    <span class="ai-note">Inhalt &amp; Seite mit Unterst&uuml;tzung von KI (Claude von Anthropic) erstellt &mdash; bitte gegen dein Lehrbuch/Skript gegenpr&uuml;fen.</span>
+  </div>
+</footer>
+
+<script>
+const data = [
+  {name:"Epithelgewebe", tag:"Grenzfl\u00e4chen", accent:"var(--purple)", tint:"var(--purple-tint)",
+   merkmal:"Zellen eng gepackt, kaum Interzellularraum, sitzt auf Basalmembran, bildet Grenzfl\u00e4chen und Oberfl\u00e4chen.",
+   esel:"\u201eEng gepackt, einzige Grenze nach au\u00dfen\u201c \u2014 fast nur Zellkerne, kaum Zwischenraum sichtbar.",
+   sub:"Platt (flach, d\u00fcnn) \u00b7 Kubisch (w\u00fcrfelf\u00f6rmig) \u00b7 Zylindrisch (hoch, schmal) \u00b7 Mehrschichtig verhornt (Haut)"},
+  {name:"Bindegewebe", tag:"St\u00fctzt & verbindet", accent:"var(--pink)", tint:"var(--pink-tint)",
+   merkmal:"Wenige, verstreute Zellen (Fibro-/Chondro-/Osteozyten) in viel extrazellul\u00e4rer Matrix.",
+   esel:"\u201eBreiter Abstand\u201c \u2014 viel leerer oder faseriger Raum zwischen den Zellen.",
+   sub:"Locker (viel Platz) \u00b7 Straff/Sehne (parallele Kollagenfasern) \u00b7 Knorpel (Zellen in Lakunen) \u00b7 Knochen (Osteon = Zielscheibe)"},
+  {name:"Muskelgewebe", tag:"Bewegung", accent:"var(--rust)", tint:"var(--rust-tint)",
+   merkmal:"Lang gestreckte, faserartige Zellen, meist parallel ausgerichtet.",
+   esel:"Verzweigt + Glanzstreifen = Herz. Kerne am Rand + vielkernig = Skelett. Ein zentraler Kern, spindelf\u00f6rmig = glatt.",
+   sub:"Glatt (1 Kern, keine Streifung) \u00b7 Skelett (vielkernig, Kerne am Rand, gestreift) \u00b7 Herz (verzweigt, Glanzstreifen)"},
+  {name:"Nervengewebe", tag:"Erregungsleitung", accent:"var(--slate)", tint:"var(--slate-tint)",
+   merkmal:"Sternf\u00f6rmige Zellen mit langen Forts\u00e4tzen (Axon/Dendriten), gro\u00dfer heller Kern mit Nukleolus.",
+   esel:"\u201eSpinnenzelle mit einem langen Bein\u201c \u2014 die Forts\u00e4tze sind das Giveaway.",
+   sub:"Neuron (Perikaryon + Dendriten + 1 Axon) \u00b7 Gliazellen (kleiner, Helferzellen)"}
+];
+let idx = 0, flipped = false;
+const tabsEl = document.getElementById('tabs');
+data.forEach((d,i)=>{
+  const b = document.createElement('button');
+  b.textContent = d.name.replace('gewebe','');
+  b.onclick = ()=>{ idx=i; flipped=false; render(); };
+  b.id = 'tab-'+i;
+  tabsEl.appendChild(b);
+});
+const cardEl = document.getElementById('card');
+cardEl.addEventListener('click', ()=>{ flipped = !flipped; render(); });
+function render(){
+  const d = data[idx];
+  for(let i=0;i<data.length;i++){
+    document.getElementById('tab-'+i).className = i===idx ? 'active' : '';
+  }
+  cardEl.style.borderLeft = '4px solid ' + d.accent;
+  if(!flipped){
+    cardEl.innerHTML = `<div class="front">
+        <p class="tag">${d.tag}</p>
+        <p class="name">${d.name}</p>
+        <p class="hint">Klicken zum Umdrehen</p>
+      </div>`;
+  } else {
+    cardEl.innerHTML = `
+      <p style="font-family:var(--font-display);font-size:20px;margin:0 0 14px">${d.name}</p>
+      <p class="block-label">Erkennungsmerkmal</p>
+      <p class="merkmal">${d.merkmal}</p>
+      <p class="block-label">Eselsbr\u00fccke</p>
+      <p class="eselsbruecke" style="border-color:${d.accent}">${d.esel}</p>
+      <p class="block-label">Unterarten</p>
+      <p style="font-size:13px;margin:0">${d.sub}</p>`;
+  }
+}
+document.getElementById('flipBtn').onclick = (e)=>{ e.stopPropagation(); flipped=!flipped; render(); };
+document.getElementById('nextBtn').onclick = (e)=>{ e.stopPropagation(); idx=(idx+1)%data.length; flipped=false; render(); };
+document.getElementById('prevBtn').onclick = (e)=>{ e.stopPropagation(); idx=(idx-1+data.length)%data.length; flipped=false; render(); };
+render();
+</script>
+
+</body>
+</html>
